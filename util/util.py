@@ -154,7 +154,10 @@ def save_image(image_numpy, image_path, create_dir=False, aspect_ratio=1.0):
         image_numpy = image_numpy.squeeze(0)
     image_pil = Image.fromarray(image_numpy)
 
-    h, w, _ = image_numpy.shape
+    shape = image_numpy.shape
+    #h, w, _ = image_numpy.shape
+    h = shape[0]
+    w = shape[1]
 
     if aspect_ratio is None:
         pass

@@ -432,6 +432,12 @@ class ContrastivePix2PixModel(torch.nn.Module):
 
     def get_nce_feats(self, input_semantics, fake_image, real_image):
         netF_k = self.netF_q
+
+        # if output_nc==1, tile to 3ch so it fits VGG's expected input
+        if self.opt.output_nc == 1:
+            fake_image = torch.tile(fake_image,(1,3,1,1))
+            real_image = torch.tile(real_image,(1,3,1,1))
+        
         feat_k, feat_k_pool, sample_ids = netF_k(
             real_image,
             num_patches=self.opt.num_patches,
