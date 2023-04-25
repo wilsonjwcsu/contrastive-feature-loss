@@ -320,7 +320,7 @@ class BaseOptions:
         self.initialized = True
         return parser
 
-    def gather_options(self):
+    def gather_options(self,args=None):
         # initialize parser with basic options
         if not self.initialized:
             parser = argparse.ArgumentParser(
@@ -329,7 +329,7 @@ class BaseOptions:
             parser = self.initialize(parser)
 
         # get the basic options
-        opt, unknown = parser.parse_known_args()
+        opt, unknown = parser.parse_known_args(args)
 
         # modify model-related parser options
         model_name = opt.model
@@ -345,7 +345,7 @@ class BaseOptions:
         evaluation_option_setter = evaluation.get_option_setter()
         parser = evaluation_option_setter(parser, self.isTrain)
 
-        opt, unknown = parser.parse_known_args()
+        opt, unknown = parser.parse_known_args(args)
 
         # if there is opt_file, load it.
         # The previous default options will be overwritten
@@ -357,7 +357,7 @@ class BaseOptions:
                 print('Options not loaded from file!')
 
         # opt = parser.parse_args()
-        opt, _ = parser.parse_known_args()
+        opt, _ = parser.parse_known_args(args)
         self.parser = parser
         return opt
 
@@ -411,9 +411,9 @@ class BaseOptions:
             pass
         return opt
 
-    def parse(self, save=False):
+    def parse(self, save=False, args=None):
 
-        opt = self.gather_options()
+        opt = self.gather_options(args)
         opt.isTrain = self.isTrain  # train or test
         opt = self.update_options(opt)
         opt.name = f'{opt.dataset_mode}_{opt.model}' if opt.name is None else opt.name
