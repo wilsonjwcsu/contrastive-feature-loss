@@ -342,7 +342,8 @@ class ContrastivePix2PixModel(torch.nn.Module):
             data['label'] = data['label'].long()
         if self.use_gpu():
             data['label'] = data['label'].cuda()
-            data['instance'] = data['instance'].cuda()
+            if not self.opt.no_instance:
+                data['instance'] = data['instance'].cuda()
             data['image'] = data['image'].cuda()
 
         if self.opt.no_input_semantics:
