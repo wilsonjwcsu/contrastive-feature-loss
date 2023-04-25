@@ -314,6 +314,9 @@ class BaseOptions:
             default='vgg19',
             help='downsample the feature map: ConvEncoder | VGG | ResNet',
         )
+        parser.add_argument('--ema',type=float,default=0.,help='exp moving avg?')
+        parser.add_argument('--use_ema',type=util.str2bool,default=False,help='use exp moving avg?')
+        parser.add_argument('--condition_run_stats',type=util.str2bool,default=False,help='running statistics conditioning?')
         self.initialized = True
         return parser
 

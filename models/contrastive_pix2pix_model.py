@@ -242,7 +242,8 @@ class ContrastivePix2PixModel(torch.nn.Module):
             util.save_network(self.netD, 'D', epoch, self.opt)
         if self.opt.use_vae:
             util.save_network(self.netE, 'E', epoch, self.opt)
-        if self.opt.nce_m > 0.0 or self.opt.nce_no_share:
+        #if self.opt.nce_m > 0.0 or self.opt.nce_no_share:
+        if not(self.netF_k is None):
             util.save_network(self.netF_k, 'F_k', epoch, self.opt)
         if vars(self.opt).get('unfrozen_vgg'):
             util.save_network(self.criterionVGG, 'VGG', epoch, self.opt)

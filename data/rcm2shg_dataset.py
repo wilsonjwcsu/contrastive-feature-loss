@@ -28,7 +28,7 @@ class Rcm2shgDataset(Pix2pixDataset):
         parser.set_defaults(contain_dontcare_label=False)
         parser.set_defaults(no_instance=True)
         parser.set_defaults(no_input_semantics=True)
-        parser.set_defaults(use_wandb=False)
+        parser.set_defaults(use_wandb=True)
         return parser
 
     def get_paths(self, opt):
