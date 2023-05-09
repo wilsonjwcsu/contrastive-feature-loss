@@ -246,7 +246,7 @@ class BaseOptions:
             '--evaluation_metrics',
             type=str,
             default='none',
-            choices=['fid'],
+            choices=['fid', 'l1'],
             help='evaluation metrics to use.',
         )
         parser.add_argument('--inception_weights', type=str, default='fid_inception')
